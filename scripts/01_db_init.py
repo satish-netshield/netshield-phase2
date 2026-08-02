@@ -56,14 +56,31 @@ def create_database() -> None:
 
         cursor.execute(
             """
-            CREATE TABLE IF NOT EXISTS incidents (
+             CREATE TABLE IF NOT EXISTS incidents (
                 incident_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 asset_id INTEGER NOT NULL,
                 incident_type TEXT NOT NULL,
                 source_ip TEXT,
                 description TEXT NOT NULL,
+                initial_severity TEXT NOT NULL
+                    CHECK (
+                        initial_severity IN (
+                            'Low',
+                            'Medium',
+                            'High',
+                            'Critical'
+                        )
+                    ),
                 severity TEXT NOT NULL
-                    CHECK (severity IN ('Low', 'Medium', 'High', 'Critical')),
+                    CHECK (
+                        severity IN (
+                            'Low',
+                            'Medium',
+                            'High',
+                            'Critical'
+                        )
+                    ),
+                classification_reason TEXT,
                 status TEXT NOT NULL DEFAULT 'Open'
                     CHECK (
                         status IN (
@@ -75,8 +92,8 @@ def create_database() -> None:
                     ),
                 detected_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (asset_id) REFERENCES assets(asset_id)
-            )
-            """
+            ),
+"""
         )
 
         cursor.execute(
