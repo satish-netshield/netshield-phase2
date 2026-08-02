@@ -1,31 +1,43 @@
+# Project Notes
+
 ## Database Initialization
 
-The database initialization script creates the SQLite database used throughout the project.
+The database initialization script creates the SQLite database and prepares the core tables required for the project.
 
-It creates five core tables:
-
-- Assets
-- Vulnerabilities
-- Incidents
-- Risk Scores
-- Incident Timeline
-
-The database is created only if it does not already exist, allowing the script to be run multiple times safely.
+The script can be executed multiple times safely because each table is created only if it does not already exist.
 
 ### Notes from Testing
 
 - Database created successfully.
 - All five tables were verified using SQLite.
-- Foreign key support is enabled by the application.
+- Foreign key support was enabled successfully.
+
+---
 
 ## Asset Inventory
 
-The asset inventory script adds enterprise assets to the SQLite database and displays the current inventory.
+The Asset Inventory component stores enterprise assets and displays the current inventory.
 
-The script uses parameterized SQL queries to insert data safely. It can be run multiple times without creating duplicate IP records.
+The script uses parameterised SQL queries to safely insert asset records while preventing duplicate IP addresses.
 
 ### Notes from Testing
 
 - Four sample assets were added successfully.
-- The second run confirmed that duplicate IP addresses were blocked.
-- Duplicate errors were replaced with clearer user-facing messages.
+- Asset records were displayed correctly.
+- Duplicate IP addresses were rejected.
+- Existing records remained unchanged after multiple test runs.
+
+---
+
+## Vulnerability Tracking
+
+The Vulnerability Tracking component records security weaknesses against existing enterprise assets.
+
+The script checks for duplicate records before inserting new vulnerabilities and displays the inventory ordered by severity.
+
+### Notes from Testing
+
+- Four vulnerabilities were stored successfully.
+- Vulnerabilities were linked to the correct assets.
+- Duplicate vulnerability records were prevented.
+- Foreign-key validation successfully rejected invalid asset IDs.

@@ -1,17 +1,41 @@
-...
 ## Asset Inventory Workflow
 
 ```text
 Start
   ↓
-Connect to enterprise database
+Receive Asset Information
   ↓
-Enable foreign key enforcement
+Validate Asset Details
   ↓
-Insert asset record
+Store Asset in Enterprise Database
   ↓
-Validate unique IP address
+Prevent Duplicate IP Addresses
   ↓
-Commit valid record
+Update Asset Inventory
   ↓
-Display current asset inventory
+Display Current Inventory
+```
+
+The Asset Inventory forms the foundation of the NetShield Enterprise platform.
+
+---
+
+## Vulnerability Tracking Workflow
+
+```text
+Select Existing Asset
+  ↓
+Receive Vulnerability Information
+  ↓
+Check for Existing Record
+  ↓
+Validate Asset Relationship
+  ↓
+Store Vulnerability
+  ↓
+Prioritise by Severity
+  ↓
+Display Vulnerability Inventory
+```
+
+Each vulnerability is linked to an existing enterprise asset, allowing analysts to identify the affected system before assessing risk.
