@@ -26,6 +26,18 @@ Run the Risk Scoring Engine:
 python3 scripts/04_risk_scoring.py
 ```
 
+Run Event Detection:
+
+```bash
+python3 scripts/05_event_detector.py
+```
+
+Run Severity Classification:
+
+```bash
+python3 scripts/06_severity_classifier.py
+```
+
 ---
 
 ## SQLite Commands
@@ -70,6 +82,42 @@ View stored risk scores:
 
 ```bash
 sqlite3 data/enterprise.db "SELECT asset_id, risk_score, risk_level, calculation_reason FROM risk_scores;"
+```
+
+Count detected incidents:
+
+```bash
+sqlite3 data/enterprise.db "SELECT COUNT(*) FROM incidents;"
+```
+
+View incident details:
+
+```bash
+sqlite3 data/enterprise.db "SELECT incident_id, asset_id, incident_type, source_ip, severity, status, description FROM incidents;"
+```
+
+Count incidents by severity:
+
+```bash
+sqlite3 data/enterprise.db "SELECT severity, COUNT(*) FROM incidents GROUP BY severity ORDER BY COUNT(*) DESC;"
+```
+
+View classified incidents:
+
+```bash
+sqlite3 data/enterprise.db "SELECT incident_id, initial_severity, severity, classification_reason FROM incidents;"
+```
+
+Count incidents by final severity:
+
+```bash
+sqlite3 data/enterprise.db "SELECT severity, COUNT(*) FROM incidents GROUP BY severity ORDER BY severity;"
+```
+
+View the incidents table schema:
+
+```bash
+sqlite3 data/enterprise.db ".schema incidents"
 ```
 
 ---

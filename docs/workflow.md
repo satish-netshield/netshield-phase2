@@ -64,3 +64,52 @@ Assign Risk Level
 Store Current Risk Assessment
 ```
 
+---
+
+## Event Detection Workflow
+
+```text
+Receive Simulated Event
+  ↓
+Confirm Related Asset Exists
+  ↓
+Review Event Type and Context
+  ↓
+Apply Detection Rules
+  ↓
+Normal Activity?
+  ├── Yes → Record as Reviewed Activity
+  └── No  → Create Security Incident
+                    ↓
+           Assign Initial Severity
+                    ↓
+           Prevent Duplicate Detection
+                    ↓
+           Store Incident as Open
+```
+
+The detector uses asset importance, failed-attempt count, location, network type, and time context to distinguish normal activity from events requiring investigation.
+
+---
+
+## Severity Classification Workflow
+
+```text
+Read Open Incidents
+  ↓
+Preserve Initial Severity
+  ↓
+Read Related Asset Risk
+  ↓
+Convert Severity and Risk to Points
+  ↓
+Calculate Classification Score
+  ↓
+Assign Final Severity
+  ↓
+Store Classification Reason
+  ↓
+Update Current Incident Priority
+```
+
+The classifier uses the original detection severity and current asset risk to produce a consistent and explainable final priority.

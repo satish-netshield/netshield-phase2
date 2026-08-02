@@ -57,3 +57,37 @@ Existing risk records are deleted before recalculation so the table represents t
 - Calculation reasons were stored with each score.
 - Re-running the script kept the risk-score count at four.
 
+---
+
+## Event Detection
+
+The Event Detection component analyses simulated activity and stores events that match defined security rules.
+
+The detector confirms that the related asset exists, evaluates event context, prevents duplicate incident records, and stores suspicious activity with an initial severity and Open status.
+
+### Notes from Testing
+
+- Four simulated events were processed.
+- Three events matched detection rules.
+- One normal login was reviewed without being stored as an incident.
+- Duplicate detections were skipped during repeated test runs.
+- The final incident count remained at three.
+- Severity totals were verified as two High and one Medium.
+
+---
+
+## Severity Classification
+
+The Severity Classification component combines the original detection severity with the affected asset's current risk level.
+
+The original severity is stored separately from the final severity, preventing repeated classification from continuously increasing incident priority.
+
+### Notes from Testing
+
+- Three incidents were classified successfully.
+- The brute-force incident remained High.
+- The after-hours critical asset incident increased to Critical.
+- Suspicious USB activity increased from Medium to High.
+- Classification reasons were stored in the incidents table.
+- Repeated classification produced stable results.
+- The database initialization and Event Detection scripts were updated for fresh project installations.
