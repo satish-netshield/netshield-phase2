@@ -60,3 +60,47 @@ ID: 2 | Asset: HR-Laptop-01 | Vulnerability: Outdated Web Browser | CVE: Not ass
 - Results were ordered by severity.
 - Duplicate vulnerability records were prevented.
 - Foreign-key validation prevented vulnerabilities from being linked to non-existent assets.
+
+## Risk Scoring Engine
+
+The Risk Scoring Engine calculates an overall risk score for each enterprise asset.
+
+The score combines:
+
+- Asset criticality
+- Highest vulnerability severity
+- Number of vulnerabilities
+
+### Scoring Model
+
+| Factor | Value |
+|---|---:|
+| Low asset criticality | 10 |
+| Medium asset criticality | 20 |
+| High asset criticality | 30 |
+| Critical asset criticality | 40 |
+| Low vulnerability severity | 5 |
+| Medium vulnerability severity | 10 |
+| High vulnerability severity | 20 |
+| Critical vulnerability severity | 30 |
+| Each vulnerability | 5 |
+
+The final score is classified as:
+
+| Score | Risk Level |
+|---|---|
+| 0–20 | Low |
+| 21–40 | Medium |
+| 41–60 | High |
+| 61–100 | Critical |
+
+### Example Output
+
+```text
+NetShield Enterprise Risk Assessment
+----------------------------------------------------------------------------------------------------
+Finance-Laptop-01         | Score: 55  | Risk: High     | Asset: High     | Highest vulnerability: High
+HR-Laptop-01              | Score: 35  | Risk: Medium   | Asset: Medium   | Highest vulnerability: Medium
+Database-Server-01        | Score: 75  | Risk: Critical | Asset: Critical | Highest vulnerability: Critical
+VPN-Gateway-01            | Score: 65  | Risk: Critical | Asset: Critical | Highest vulnerability: High
+```

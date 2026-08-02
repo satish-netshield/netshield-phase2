@@ -39,3 +39,28 @@ Display Vulnerability Inventory
 ```
 
 Each vulnerability is linked to an existing enterprise asset, allowing analysts to identify the affected system before assessing risk.
+
+---
+
+## Risk Scoring Workflow
+
+```text
+Read Enterprise Assets
+  ↓
+Review Linked Vulnerabilities
+  ↓
+Identify Highest Vulnerability Severity
+  ↓
+Apply Asset Criticality Points
+  ↓
+Add Vulnerability Severity Points
+  ↓
+Add Vulnerability Count Points
+  ↓
+Calculate Overall Risk Score
+  ↓
+Assign Risk Level
+  ↓
+Store Current Risk Assessment
+```
+

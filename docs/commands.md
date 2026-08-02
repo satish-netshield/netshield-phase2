@@ -19,6 +19,13 @@ Run Vulnerability Tracking:
 ```bash
 python3 scripts/03_vulnerability_tracker.py
 ```
+
+Run the Risk Scoring Engine:
+
+```bash
+python3 scripts/04_risk_scoring.py
+```
+
 ---
 
 ## SQLite Commands
@@ -58,6 +65,13 @@ Test foreign-key protection:
 ```bash
 sqlite3 data/enterprise.db "PRAGMA foreign_keys = ON; INSERT INTO vulnerabilities (asset_id, vulnerability_name, severity, description) VALUES (999, 'Invalid Test Vulnerability', 'High', 'Foreign key test');"
 ```
+
+View stored risk scores:
+
+```bash
+sqlite3 data/enterprise.db "SELECT asset_id, risk_score, risk_level, calculation_reason FROM risk_scores;"
+```
+
 ---
 
 ## Git Commands
@@ -109,3 +123,4 @@ Git Push
   ↓
 Next Component
 ```
+

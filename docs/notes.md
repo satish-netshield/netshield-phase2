@@ -41,3 +41,19 @@ The script checks for duplicate records before inserting new vulnerabilities and
 - Vulnerabilities were linked to the correct assets.
 - Duplicate vulnerability records were prevented.
 - Foreign-key validation successfully rejected invalid asset IDs.
+
+---
+
+## Risk Scoring Engine
+
+The Risk Scoring Engine calculates a current risk score for every asset using asset criticality, highest vulnerability severity, and vulnerability count.
+
+Existing risk records are deleted before recalculation so the table represents the latest assessment rather than storing duplicate historical scores.
+
+### Notes from Testing
+
+- Four asset risk scores were calculated successfully.
+- The Database Server received the highest score of 75.
+- Calculation reasons were stored with each score.
+- Re-running the script kept the risk-score count at four.
+
