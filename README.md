@@ -209,3 +209,74 @@ ID: 3 | Asset: VPN-Gateway-01 | Initial: Medium | Asset Risk: Critical | Score: 
 * One incident increased from Medium to High.
 * Classification reasons were stored for every incident.
 * Re-running the classifier did not cause repeated escalation.
+
+## Incident Timeline Management
+
+Once an incident has been detected and classified, it moves into the investigation stage. This component records every step of that investigation, keeps the incident status up to date, stores analyst notes, and builds a complete timeline from detection through to resolution.
+
+Using a structured workflow makes it easy to understand what has happened, what actions have already been taken, and the current state of the investigation. It also ensures the incident history remains accurate, even when the component is executed multiple times.
+
+### Investigation Workflow
+
+```text
+Open
+  ↓
+Investigating
+  ↓
+Contained
+  ↓
+Resolved
+```
+
+### Key Capabilities
+
+- Records each stage of the incident investigation lifecycle.
+- Updates the current incident status as the investigation progresses.
+- Stores analyst notes alongside every status change.
+- Builds a chronological timeline for each incident.
+- Prevents duplicate timeline events during repeated execution.
+- Preserves a complete investigation history for reporting and future review.
+
+### Example Output
+
+```text
+Incident ID: 2
+Type: After-Hours Critical Asset Access
+Severity: Critical
+Current Status: Contained
+
+Timeline
+--------------------------------------------------
+[23:33:31] Incident Detected
+
+↓
+
+[23:33:31] Status changed from Open to Investigating
+SOC analyst reviewed the privileged account,
+VPN activity, and access time.
+
+↓
+
+[23:33:31] Status changed from Investigating to Contained
+The privileged session was terminated and the
+account was temporarily restricted pending review.
+```
+
+### Notes from Testing
+
+- Three incidents were processed successfully.
+- Nine timeline events were created across all incidents.
+- Incident statuses progressed correctly through the investigation lifecycle.
+- Analyst notes were recorded for every status update.
+- Timeline events were displayed in chronological order.
+- Re-running the component did not create duplicate timeline events.
+- Re-running the component did not apply additional status updates.
+- Investigation history remained unchanged during repeated testing.
+
+### What I Learned
+
+- Detecting an incident is only the beginning; every incident also needs a documented investigation.
+- A structured lifecycle makes it easy to see the current progress of an investigation.
+- Recording analyst notes provides useful context for anyone reviewing the incident later.
+- Preventing duplicate timeline events keeps reports accurate during repeated execution.
+- Separating detection, classification, and investigation makes the project easier to maintain and extend.

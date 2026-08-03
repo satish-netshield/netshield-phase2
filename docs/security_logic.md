@@ -111,3 +111,47 @@ Storing the contributing values supports auditing, troubleshooting, rule tuning,
 A single false positive does not normally justify changing classification logic.
 
 Rules should be adjusted after repeated patterns are confirmed and proposed changes are tested to ensure real attacks are not missed.
+
+---
+
+## Why Incident Timeline Management Is Used
+
+An incident should follow a structured investigation process rather than being closed immediately after detection.
+
+Recording each investigation stage creates a complete audit trail that shows what happened, who responded, and how the incident was handled.
+
+## Why Incidents Follow a Fixed Lifecycle
+
+Using the sequence Open → Investigating → Contained → Resolved ensures every incident is investigated, contained, and documented before it is closed.
+
+A structured workflow also helps analysts taking over the investigation understand its current progress without reviewing every log from the beginning.
+
+## Why Timeline Events Are Stored
+
+Each timeline event records an important action during the investigation.
+
+This provides historical evidence for auditing, reporting, compliance requirements, and post-incident reviews.
+
+## Why Analyst Notes Are Recorded
+
+Status changes alone do not explain why an incident progressed through each stage.
+
+Recording analyst notes documents the investigation process and helps future analysts understand the actions already performed.
+
+## Why Duplicate Timeline Events Are Prevented
+
+The Incident Timeline component may be executed multiple times during testing or project validation.
+
+Preventing duplicate timeline events keeps the investigation history accurate and avoids misleading reports.
+
+## Why Investigation History Is Never Removed
+
+Once an investigation event has been recorded, it becomes part of the permanent audit trail.
+
+Keeping historical records supports compliance, forensic analysis, and lessons learned after an incident has been resolved.
+
+## Why Current Incident Status Is Updated
+
+Security teams need to know the latest investigation stage without reviewing every timeline event.
+
+Updating the current incident status provides a quick view of whether an incident is Open, Investigating, Contained, or Resolved.

@@ -91,3 +91,36 @@ The original severity is stored separately from the final severity, preventing r
 - Classification reasons were stored in the incidents table.
 - Repeated classification produced stable results.
 - The database initialization and Event Detection scripts were updated for fresh project installations.
+
+---
+
+## Incident Timeline Management
+
+The Incident Timeline Management component records the full investigation history of each security incident.
+
+Incidents follow a controlled lifecycle:
+
+```text
+Open
+  ↓
+Investigating
+  ↓
+Contained
+  ↓
+Resolved
+```
+
+Each status change is stored with an analyst note and timestamp, creating a permanent audit trail. Duplicate timeline events are prevented so repeated executions do not alter or inflate the investigation history.
+
+### Notes from Testing
+
+- Three incidents were processed successfully.
+- Nine timeline events were stored.
+- Incident 1 progressed from Open to Investigating.
+- Incident 2 progressed from Open to Investigating and then Contained.
+- Incident 3 progressed through the complete lifecycle to Resolved.
+- Analyst notes were stored for every status change.
+- Timeline events were displayed in chronological order.
+- Re-running the script created no duplicate timeline events.
+- Re-running the script applied no additional status updates.
+- Timeline totals were verified as two, three, and four events for the three incidents.

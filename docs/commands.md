@@ -38,6 +38,12 @@ Run Severity Classification:
 python3 scripts/06_severity_classifier.py
 ```
 
+Run Incident Timeline Management:
+
+```bash
+python3 scripts/07_incident_timeline.py
+```
+
 ---
 
 ## SQLite Commands
@@ -118,6 +124,42 @@ View the incidents table schema:
 
 ```bash
 sqlite3 data/enterprise.db ".schema incidents"
+```
+
+View all timeline events:
+
+```bash
+sqlite3 data/enterprise.db "SELECT * FROM incident_timeline;"
+```
+
+View timeline events in chronological order:
+
+```bash
+sqlite3 data/enterprise.db "SELECT timeline_id, incident_id, event_type, event_description, event_time FROM incident_timeline ORDER BY timeline_id;"
+```
+
+View current incident status:
+
+```bash
+sqlite3 data/enterprise.db "SELECT incident_id, incident_type, severity, status FROM incidents ORDER BY incident_id;"
+```
+
+Count stored timeline events:
+
+```bash
+sqlite3 data/enterprise.db "SELECT COUNT(*) FROM incident_timeline;"
+```
+
+Count timeline events for each incident:
+
+```bash
+sqlite3 data/enterprise.db "SELECT incident_id, COUNT(*) FROM incident_timeline GROUP BY incident_id ORDER BY incident_id;"
+```
+
+View the Incident Timeline table schema:
+
+```bash
+sqlite3 data/enterprise.db ".schema incident_timeline"
 ```
 
 ---
