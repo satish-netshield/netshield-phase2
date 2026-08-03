@@ -124,3 +124,43 @@ Each status change is stored with an analyst note and timestamp, creating a perm
 - Re-running the script created no duplicate timeline events.
 - Re-running the script applied no additional status updates.
 - Timeline totals were verified as two, three, and four events for the three incidents.
+
+---
+
+## Enterprise Dashboard
+
+The Enterprise Dashboard provides a read-only summary of the current enterprise security posture. It combines asset, vulnerability, risk, incident, and timeline information into one terminal view.
+
+### Notes from Testing
+
+- The dashboard displayed data from all five main database areas.
+- Asset, vulnerability, risk, incident, and timeline totals matched the database.
+- Risk levels were displayed as two Critical, one High, one Medium, and zero Low.
+- Incident severity totals were displayed as one Critical and two High.
+- Incident statuses were displayed as one Investigating, one Contained, and one Resolved.
+- Priority incidents were ordered by final severity.
+- Recent timeline activity was displayed in reverse chronological order.
+- Repeated execution did not create, update, or delete any database records.
+- Database counts remained unchanged at `4|4|4|3|9`.
+
+### Engineering Observations
+
+The first dashboard version displayed only the final incident severity. During review, I realised this did not clearly show whether the Severity Classification component had changed the original priority. I updated the Priority Incident Summary to display the transition from initial to final severity.
+
+The first version showed initial severity, final severity, and the change as separate values. I simplified the display to use a single line such as `High -> Critical (Escalated)`. The dashboard became cleaner and easier to understand while still showing the most important information.
+
+### What I Learned
+
+- A dashboard should explain important changes, not only show the latest values.
+- Showing initial and final severity makes classification decisions easier to review.
+- Clear presentation is just as important as accurate data.
+- Small changes to the output can make information easier for an analyst to understand.
+- A reporting component should remain read-only and should not modify operational data.
+
+### Next Expansion Scope or Idea
+
+- Add assigned analyst information.
+- Show investigation duration and response times.
+- Add filtering by severity, status, or asset.
+- Display security trends over time.
+- Export dashboard results to CSV or another report format.

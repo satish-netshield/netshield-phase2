@@ -155,3 +155,65 @@ Keeping historical records supports compliance, forensic analysis, and lessons l
 Security teams need to know the latest investigation stage without reviewing every timeline event.
 
 Updating the current incident status provides a quick view of whether an incident is Open, Investigating, Contained, or Resolved.
+
+---
+
+# Enterprise Dashboard Security Logic
+
+## Why Use a Read-Only Dashboard?
+
+The Enterprise Dashboard is designed to provide a consolidated view of the current security posture without changing any operational data. It only retrieves information from the database, ensuring that reporting activities cannot accidentally modify enterprise records.
+
+---
+
+## Why Display Enterprise Metrics?
+
+Displaying the total number of assets, vulnerabilities, risk assessments, incidents, and timeline events gives analysts a quick overview of the environment before investigating individual incidents.
+
+This reduces the need to query multiple database tables separately.
+
+---
+
+## Why Group Information by Risk and Severity?
+
+Grouping incidents and assets by their current risk and severity helps analysts quickly identify where attention is needed.
+
+Higher-risk assets and higher-severity incidents naturally receive higher priority during investigations.
+
+---
+
+## Why Display Priority Incidents?
+
+Instead of reviewing every incident, the dashboard highlights the most important incidents first. This allows analysts to focus on higher-priority events before reviewing lower-risk activity.
+
+---
+
+## Why Show Severity Changes?
+
+The dashboard displays both the initial severity and the final classified severity.
+
+For example:
+
+```
+High -> Critical (Escalated)
+```
+
+This makes it easy to understand how the Severity Classification component changed the incident priority after considering asset risk.
+
+It also helps analysts verify that the classification process is working as expected.
+
+---
+
+## Why Display Recent Timeline Activity?
+
+Showing the latest investigation events allows analysts to immediately understand the most recent actions taken during incident response.
+
+This provides useful operational context without opening the full investigation history.
+
+---
+
+## Security Benefit
+
+The Enterprise Dashboard provides a single location to review the organisation's current security posture.
+
+By combining information from multiple components into one read-only dashboard, analysts can quickly understand current risks, active incidents, and recent investigation activity while preserving the integrity of the enterprise database.

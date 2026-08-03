@@ -297,3 +297,94 @@ Display Investigation Timeline
 ### Security Purpose
 
 The Incident Timeline Management component records every stage of the investigation lifecycle, creating a permanent audit trail that supports analyst handovers, compliance, reporting, and future investigations.
+
+---
+
+## Enterprise Dashboard Workflow
+
+### Workflow
+
+```text
+Enterprise Database
+        │
+        ├── Assets
+        ├── Vulnerabilities
+        ├── Risk Scores
+        ├── Incidents
+        └── Incident Timeline
+                 │
+                 ▼
+        Enterprise Dashboard
+                 │
+                 ▼
+     Consolidated Security Summary
+```
+
+### Component Inputs
+
+The Enterprise Dashboard reads information from:
+
+- Assets
+- Vulnerabilities
+- Risk Scores
+- Incidents
+- Incident Timeline
+
+The component only reads data from the database. No records are inserted, updated, or deleted.
+
+### Component Processing
+
+The Enterprise Dashboard:
+
+- Counts enterprise assets, vulnerabilities, incidents, and timeline events.
+- Summarises current asset risk levels.
+- Summarises incident severity levels.
+- Summarises incident status.
+- Displays the highest priority incidents.
+- Shows how incident severity changed after classification.
+- Displays the most recent investigation activity.
+
+### Component Outputs
+
+The Enterprise Dashboard displays:
+
+- Enterprise Overview
+- Asset Risk Summary
+- Incident Severity Summary
+- Incident Status Summary
+- Priority Incident Summary
+- Recent Timeline Activity
+
+This allows an analyst to understand the current security posture without querying multiple database tables.
+
+### Workflow Summary
+
+```text
+Assets
+        │
+Vulnerabilities
+        │
+Risk Scores
+        │
+Incidents
+        │
+Incident Timeline
+        │
+        ▼
+Enterprise Dashboard
+        │
+        ▼
+Security Summary for SOC Analyst
+```
+
+### Workflow Design Decision
+
+The Enterprise Dashboard was designed as a read-only reporting component.
+
+Previous components create, update, and classify security information. The Enterprise Dashboard only reads and presents the latest security posture in a clear and organised format.
+
+Keeping reporting separate from processing makes the component easier to maintain, protects the enterprise database from accidental changes, and follows the single responsibility principle.
+
+### Security Purpose
+
+The Enterprise Dashboard brings together information from every previous component into a single read-only view. It helps analysts quickly understand the current security posture without modifying enterprise data, supporting faster investigations and informed security decisions.

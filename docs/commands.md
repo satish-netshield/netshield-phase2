@@ -44,6 +44,12 @@ Run Incident Timeline Management:
 python3 scripts/07_incident_timeline.py
 ```
 
+Run Enterprise Dashboard:
+
+```bash
+python3 scripts/08_enterprise_dashboard.py
+```
+
 ---
 
 ## SQLite Commands
@@ -162,6 +168,25 @@ View the Incident Timeline table schema:
 sqlite3 data/enterprise.db ".schema incident_timeline"
 ```
 
+Verify Enterprise Dashboard data:
+
+```bash
+sqlite3 data/enterprise.db "
+SELECT
+(SELECT COUNT(*) FROM assets),
+(SELECT COUNT(*) FROM vulnerabilities),
+(SELECT COUNT(*) FROM risk_scores),
+(SELECT COUNT(*) FROM incidents),
+(SELECT COUNT(*) FROM incident_timeline);
+"
+```
+
+Expected Output:
+
+```text
+4|4|4|3|9
+```
+
 ---
 
 ## Git Commands
@@ -214,3 +239,4 @@ Git Push
 Next Component
 ```
 
+---

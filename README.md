@@ -1,6 +1,6 @@
 ## Asset Inventory
 
-The Asset Inventory component stores and displays enterprise assets such as laptops, servers, and network devices.
+The Asset Inventory component records and manages enterprise assets such as laptops, servers, and network devices.
 
 Each asset includes:
 
@@ -158,7 +158,7 @@ ID: 3 | Asset: VPN-Gateway-01 | Type: Suspicious USB Activity | Initial Severity
 
 The Severity Classification component reviews each detected incident using its initial severity and the current risk level of the affected asset.
 
-The classifier uses a transparent point-based model.
+The classifier uses a simple point-based scoring model.
 
 ### Initial Severity Points
 
@@ -210,11 +210,13 @@ ID: 3 | Asset: VPN-Gateway-01 | Initial: Medium | Asset Risk: Critical | Score: 
 * Classification reasons were stored for every incident.
 * Re-running the classifier did not cause repeated escalation.
 
+---
+
 ## Incident Timeline Management
 
-Once an incident has been detected and classified, it moves into the investigation stage. This component records every step of that investigation, keeps the incident status up to date, stores analyst notes, and builds a complete timeline from detection through to resolution.
+Once an incident has been detected and classified, it moves into the investigation stage. This component records every step of the investigation, updates the incident status, stores analyst notes, and builds a complete timeline from detection through to resolution.
 
-Using a structured workflow makes it easy to understand what has happened, what actions have already been taken, and the current state of the investigation. It also ensures the incident history remains accurate, even when the component is executed multiple times.
+A structured workflow makes it easy to understand what has happened, what actions have already been taken, and the current state of the investigation. It also keeps the incident history accurate when the component is executed multiple times.
 
 ### Investigation Workflow
 
@@ -262,7 +264,7 @@ The privileged session was terminated and the
 account was temporarily restricted pending review.
 ```
 
-### Notes from Testing
+### Testing Notes
 
 - Three incidents were processed successfully.
 - Nine timeline events were created across all incidents.
@@ -273,10 +275,99 @@ account was temporarily restricted pending review.
 - Re-running the component did not apply additional status updates.
 - Investigation history remained unchanged during repeated testing.
 
+---
+
+## Enterprise Dashboard
+
+The Enterprise Dashboard brings together information from every previous component into a single read-only view. It provides a summary of enterprise assets, vulnerabilities, risk assessments, incidents, and investigation activity, helping analysts quickly understand the current security posture.
+
+The dashboard only reads information from the database. It does not create, update, or delete any records, making it safe to use for reporting and daily operational monitoring.
+
+### Workflow
+
+```text
+Enterprise Database
+        │
+        ├── Assets
+        ├── Vulnerabilities
+        ├── Risk Scores
+        ├── Incidents
+        └── Incident Timeline
+                 │
+                 ▼
+        Enterprise Dashboard
+                 │
+                 ▼
+     Consolidated Security Summary
+```
+
+### Key Capabilities
+
+- Displays a consolidated view of enterprise security information.
+- Summarises enterprise assets, vulnerabilities, risk assessments, incidents, and timeline events.
+- Groups assets by current risk level.
+- Groups incidents by current severity and investigation status.
+- Shows priority incidents using the latest classified severity.
+- Displays the severity transition from initial to final classification.
+- Displays the most recent investigation activity.
+- Operates in read-only mode without modifying enterprise data.
+
+### Example Output
+
+```text
+Enterprise Overview
+------------------------------------------------------------
+Total Assets               : 4
+Total Vulnerabilities      : 4
+Total Risk Assessments     : 4
+Total Incidents            : 3
+Timeline Events            : 9
+
+Priority Incident Summary
+
+ID: 2 | Asset: Database-Server-01
+Type: After-Hours Critical Asset Access
+Severity: High -> Critical (Escalated)
+Status: Contained
+
+ID: 1 | Asset: Finance-Laptop-01
+Type: Possible Brute Force Attempt
+Severity: High -> High (Unchanged)
+Status: Investigating
+
+ID: 3 | Asset: VPN-Gateway-01
+Type: Suspicious USB Activity
+Severity: Medium -> High (Escalated)
+Status: Resolved
+```
+
+### Testing Notes
+
+- The dashboard displayed information from all enterprise components.
+- Asset, vulnerability, risk, incident, and timeline totals matched the database.
+- Priority incidents were displayed using the final classified severity.
+- Severity transitions were displayed correctly for every incident.
+- Recent investigation activity was displayed in reverse chronological order.
+- Re-running the dashboard did not create, modify, or delete database records.
+- Database verification confirmed the dashboard operates in read-only mode.
+
+### Engineering Observations
+
+- During testing I realised that displaying only the final severity did not clearly show how the classification process changed an incident's priority. I updated the dashboard to display the transition from the initial severity to the final severity.
+- I first displayed the initial severity, final severity, and change as separate values. Replacing them with a single format such as `High -> Critical (Escalated)` made the dashboard cleaner and easier to understand while still showing the most important information.
+
 ### What I Learned
 
-- Detecting an incident is only the beginning; every incident also needs a documented investigation.
-- A structured lifecycle makes it easy to see the current progress of an investigation.
-- Recording analyst notes provides useful context for anyone reviewing the incident later.
-- Preventing duplicate timeline events keeps reports accurate during repeated execution.
-- Separating detection, classification, and investigation makes the project easier to maintain and extend.
+- A dashboard should explain important changes, not only display the latest values.
+- Showing the severity transition makes classification decisions easier to review.
+- Read-only reporting protects operational data while providing useful visibility.
+- Clear presentation is just as important as accurate data.
+- Small improvements to the output can make security information easier for analysts to understand.
+
+### Next Expansion Scope or Idea
+
+- Display assigned SOC analysts for active incidents.
+- Show investigation duration and response time metrics.
+- Add filtering by severity, status, or asset.
+- Display security trends across multiple reporting periods.
+- Export dashboard summaries to CSV or PDF reports.
