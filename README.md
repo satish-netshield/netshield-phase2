@@ -281,7 +281,7 @@ account was temporarily restricted pending review.
 
 The Enterprise Dashboard brings together information from every previous component into a single read-only view. It provides a summary of enterprise assets, vulnerabilities, risk assessments, incidents, and investigation activity, helping analysts quickly understand the current security posture.
 
-The dashboard only reads information from the database. It does not create, update, or delete any records, making it safe to use for reporting and daily operational monitoring.
+The dashboard only reads data from the database. It does not create, update, or delete any records, making it safe to use for reporting and daily operational monitoring.
 
 ### Workflow
 
