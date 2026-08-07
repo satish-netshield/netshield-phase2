@@ -92,8 +92,8 @@ def create_database() -> None:
                     ),
                 detected_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (asset_id) REFERENCES assets(asset_id)
-            ),
-"""
+            )
+            """
         )
 
         cursor.execute(

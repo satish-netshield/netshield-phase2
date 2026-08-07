@@ -90,7 +90,6 @@ The original severity is stored separately from the final severity, preventing r
 - Suspicious USB activity increased from Medium to High.
 - Classification reasons were stored in the incidents table.
 - Repeated classification produced stable results.
-- The database initialization and Event Detection scripts were updated for fresh project installations.
 
 ---
 
@@ -164,3 +163,43 @@ The first version showed initial severity, final severity, and the change as sep
 - Add filtering by severity, status, or asset.
 - Display security trends over time.
 - Export dashboard results to CSV or another report format.
+
+---
+
+# System Validation
+
+The System Validation component confirms that every NetShield Enterprise component works correctly from a clean installation.
+
+Instead of testing components individually, the project is rebuilt from an empty database and every component is executed in sequence. This verifies that the complete workflow functions correctly and that a new user can run the project successfully from start to finish.
+
+### Notes from Testing
+
+- The existing database was removed before testing began.
+- A new database was created successfully.
+- All five database tables were created correctly.
+- Every project component completed successfully.
+- The final database totals were verified as `4|4|4|3|9`.
+- Two integration issues were identified during clean-state testing.
+- Both issues were corrected and the complete workflow was successfully revalidated.
+- The final validation confirmed the complete project works from a clean installation.
+
+### Engineering Observations
+
+- During clean-state testing I found two issues that were not visible during normal development. One was in the database creation script, and the other was in the incident insertion logic.
+- These issues only appeared after deleting the database and rebuilding the entire project from the beginning. This confirmed that testing from a fresh installation is just as important as testing individual components.
+
+### What I Learned
+
+- Running every component from a clean database is the best way to confirm the project works from start to finish.
+- Database changes should always be checked against every script that reads from or writes to that table.
+- Testing each component is important, but end-to-end testing is what confirms the whole system works together.
+- Small issues can remain hidden until the complete workflow is tested from the beginning.
+- Fixing problems found during validation makes the project more reliable for anyone using it for the first time.
+
+### Next Expansion Scope or Idea
+
+- Test the project using larger enterprise datasets.
+- Add automated validation for future project builds.
+- Generate validation reports automatically.
+- Add regression testing before future releases.
+- Validate the project across different operating systems.

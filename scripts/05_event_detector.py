@@ -157,10 +157,11 @@ def store_incident(
             incident_type,
             source_ip,
             description,
+            initial_severity,
             severity,
             status
         )
-        VALUES (?, ?, ?, ?, ?, 'Open')
+        VALUES (?, ?, ?, ?, ?, ?, 'Open')
         """,
         (
             asset_id,

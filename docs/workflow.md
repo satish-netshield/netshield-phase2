@@ -388,3 +388,79 @@ Keeping reporting separate from processing makes the component easier to maintai
 ### Security Purpose
 
 The Enterprise Dashboard brings together information from every previous component into a single read-only view. It helps analysts quickly understand the current security posture without modifying enterprise data, supporting faster investigations and informed security decisions.
+
+---
+
+## System Validation Workflow
+
+### Workflow
+
+```text
+Delete Existing Database
+        │
+        ▼
+Create New Database
+        │
+        ▼
+Run Database Initialization
+        │
+        ▼
+Run Asset Inventory
+        │
+        ▼
+Run Vulnerability Tracking
+        │
+        ▼
+Run Risk Scoring Engine
+        │
+        ▼
+Run Event Detection
+        │
+        ▼
+Run Severity Classification
+        │
+        ▼
+Run Incident Timeline Management
+        │
+        ▼
+Run Enterprise Dashboard
+        │
+        ▼
+Verify Database Integrity
+        │
+        ▼
+System Validation Complete
+```
+
+### Component Inputs
+
+- NetShield Enterprise project files.
+- Empty SQLite database.
+- All project components.
+- Validation test data.
+
+### Component Processing
+
+- Creates a new enterprise database.
+- Executes every component in the correct order.
+- Verifies the expected database records.
+- Confirms the complete workflow operates correctly.
+- Identifies and corrects integration issues.
+- Revalidates the complete system after fixes.
+
+### Component Outputs
+
+- Fully validated enterprise database.
+- Verified end-to-end workflow.
+- Confirmed database totals (`4|4|4|3|9`).
+- Production-ready project build.
+
+### Workflow Design Decision
+
+System Validation is performed only after every component has been completed.
+
+Rather than testing individual features in isolation, the project is rebuilt from a clean database and executed from beginning to end. This confirms that every component works correctly together and that the project can be successfully reproduced by another user.
+
+### Security Purpose
+
+The System Validation workflow verifies the reliability of the complete NetShield Enterprise platform. It confirms that every component operates correctly, identifies integration issues before deployment, and ensures the final project is stable, repeatable, and ready for operational use.

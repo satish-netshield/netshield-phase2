@@ -148,7 +148,7 @@ Preventing duplicate timeline events keeps the investigation history accurate an
 
 Once an investigation event has been recorded, it becomes part of the permanent audit trail.
 
-Keeping historical records supports compliance, forensic analysis, and lessons learned after an incident has been resolved.
+Keeping historical records supports compliance, forensic analysis, and future incident reviews.
 
 ## Why Current Incident Status Is Updated
 
@@ -217,3 +217,37 @@ This provides useful operational context without opening the full investigation 
 The Enterprise Dashboard provides a single location to review the organisation's current security posture.
 
 By combining information from multiple components into one read-only dashboard, analysts can quickly understand current risks, active incidents, and recent investigation activity while preserving the integrity of the enterprise database.
+
+---
+
+# System Validation Security Logic
+
+## Why System Validation Is Performed
+
+Testing individual components does not always confirm that the complete project works correctly.
+
+System Validation rebuilds the project from an empty database and executes every component in sequence to verify the complete workflow.
+
+---
+
+## Why Clean-State Testing Is Important
+
+Projects often evolve over time as new features are added.
+
+Starting from a clean database helps identify issues that may remain hidden when an existing database is reused during development.
+
+---
+
+## Why Full Workflow Validation Matters
+
+Every component may work correctly on its own, but the complete project can still fail if one component no longer matches another.
+
+Running the entire workflow confirms that every component works together from beginning to end.
+
+---
+
+## Security Benefit
+
+System Validation confirms that a new user can successfully build and run the complete NetShield Enterprise project from a clean installation.
+
+It also helps identify integration issues before deployment, improving the reliability and quality of the overall system.

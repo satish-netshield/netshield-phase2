@@ -351,23 +351,68 @@ Status: Resolved
 - Re-running the dashboard did not create, modify, or delete database records.
 - Database verification confirmed the dashboard operates in read-only mode.
 
+---
+
+# System Validation
+
+The System Validation component verifies that the complete NetShield Enterprise project works correctly from a clean installation.
+
+Instead of testing individual components separately, the validation process rebuilds the project from an empty database and executes every component in sequence. This confirms that all scripts work together correctly and that a new user can successfully run the project from start to finish.
+
+### Validation Workflow
+
+```text
+Delete Existing Database
+        ↓
+Create New Database
+        ↓
+Run Asset Inventory
+        ↓
+Run Vulnerability Tracking
+        ↓
+Run Risk Scoring Engine
+        ↓
+Run Event Detection
+        ↓
+Run Severity Classification
+        ↓
+Run Incident Timeline Management
+        ↓
+Run Enterprise Dashboard
+        ↓
+Verify Database Integrity
+```
+
+### Testing Notes
+
+- Database recreated successfully.
+- All database tables were created correctly.
+- Asset Inventory completed successfully.
+- Vulnerability Tracking completed successfully.
+- Risk Scoring Engine completed successfully.
+- Event Detection completed successfully.
+- Severity Classification completed successfully.
+- Incident Timeline Management completed successfully.
+- Enterprise Dashboard completed successfully.
+- Final database totals were verified as `4|4|4|3|9`.
+
 ### Engineering Observations
 
-- During testing I realised that displaying only the final severity did not clearly show how the classification process changed an incident's priority. I updated the dashboard to display the transition from the initial severity to the final severity.
-- I first displayed the initial severity, final severity, and change as separate values. Replacing them with a single format such as `High -> Critical (Escalated)` made the dashboard cleaner and easier to understand while still showing the most important information.
+- During clean-state testing I found two issues that were not visible during normal development. One was in the database creation script, and the other was in the incident insertion logic.
+- These issues only appeared after deleting the database and rebuilding the entire project from the beginning. This confirmed that testing from a fresh installation is just as important as testing individual components.
 
 ### What I Learned
 
-- A dashboard should explain important changes, not only display the latest values.
-- Showing the severity transition makes classification decisions easier to review.
-- Read-only reporting protects operational data while providing useful visibility.
-- Clear presentation is just as important as accurate data.
-- Small improvements to the output can make security information easier for analysts to understand.
+- Running every component from a clean database is the best way to confirm the project works from start to finish.
+- Database changes should always be checked against every script that reads from or writes to that table.
+- Testing each component is important, but end-to-end testing is what confirms the whole system works together.
+- Small issues can remain hidden until the complete workflow is tested from the beginning.
+- Fixing problems found during validation makes the project more reliable for anyone using it for the first time.
 
 ### Next Expansion Scope or Idea
 
-- Display assigned SOC analysts for active incidents.
-- Show investigation duration and response time metrics.
-- Add filtering by severity, status, or asset.
-- Display security trends across multiple reporting periods.
-- Export dashboard summaries to CSV or PDF reports.
+- Test the project using larger enterprise datasets.
+- Add automated validation using GitHub Actions.
+- Generate validation reports automatically after each test run.
+- Add automated regression testing for future components.
+- Validate the project across different operating systems.

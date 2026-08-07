@@ -217,6 +217,32 @@ git push
 
 ---
 
+## System Validation
+
+Run the complete project from a clean database in the following order:
+
+```text
+01_db_init.py
+        ↓
+02_asset_inventory.py
+        ↓
+03_vulnerability_tracker.py
+        ↓
+04_risk_scoring.py
+        ↓
+05_event_detector.py
+        ↓
+06_severity_classifier.py
+        ↓
+07_incident_timeline.py
+        ↓
+08_enterprise_dashboard.py
+        ↓
+Verify database totals
+```
+
+---
+
 ## Development Workflow
 
 ```text
@@ -238,5 +264,4 @@ Git Push
   ↓
 Next Component
 ```
-
 ---
